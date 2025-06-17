@@ -42,3 +42,7 @@
     background-color: rgb(237, 231, 231);
     border: none;
 }
+.explore-menu-list-item .active{
+    border:4px solid rgb(20, 188, 255);
+    padding:2px;
+}
