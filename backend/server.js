@@ -1,33 +1,37 @@
-import express from "express"
-import cors from "cors"
-import { connectDB } from "./config/db.js"
-import foodRouter from "./routes/foodRoute.js"
-import userRouter from "./routes/userRoute.js"
+import express from 'express'
+import cors from 'cors'
+import { connectDB } from './config/db.js'
+import foodRouter from './routes/foodRoute.js'
+import cartRouter from './routes/cartRoute.js'
+import userRouter from './routes/userRoute.js'
 import 'dotenv/config'
+import orderRouter from './routes/orderRoute.js'
 
 
-// app config
-const app = express()
+//app config 
+const app=express()
 const port = 4000
 
-// middleware
+//middleware
 app.use(express.json())
 app.use(cors())
+app.use('/uploads', express.static('uploads'));
 
-// db connection
+//db connection
 connectDB();
 
-// api endpoints
+//api endpoints
 app.use("/api/food",foodRouter)
 app.use("/images",express.static('uploads'))
 app.use("/api/user",userRouter)
+app.use("/api/cart",cartRouter)
+app.use("/api/order",orderRouter)
 
 app.get("/",(req,res)=>{
-    res.send("API Working")
+   res.send("API Working")
 })
 
 app.listen(port,()=>{
     console.log(`Server Started on http://localhost:${port}`)
 })
-
 // mongodb+srv://pranith-abhiram:GMgpa06@cluster0.qgnic0z.mongodb.net/?
